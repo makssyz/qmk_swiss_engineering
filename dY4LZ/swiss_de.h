@@ -1,5 +1,5 @@
 // Remaps Oryx's German (DE_*) keycodes so they type the intended character
-// when macOS is set to the "Swiss German" input source (Voyager detected as ANSI).
+// when macOS is set to the "Swiss German" input source (Voyager set to ISO / "International" keyboard type).
 // Derived from macOS's own SwissGerman keyboard layout data.
 // Included from keymap.c right after i18n.h, so Oryx updates don't overwrite it.
 #pragma once
@@ -53,9 +53,9 @@
 #undef DE_DQOT
 #define DE_DQOT S(KC_2)        // "
 #undef DE_LESS
-#define DE_LESS KC_GRV         // <
+#define DE_LESS KC_NUBS        // <
 #undef DE_MORE
-#define DE_MORE S(KC_GRV)      // >
+#define DE_MORE S(KC_NUBS)     // >
 #undef DE_MINS
 #define DE_MINS KC_SLSH        // -
 #undef DE_UNDS
@@ -75,10 +75,10 @@
 #undef DE_RBRC
 #define DE_RBRC A(KC_6)        // ]
 #undef DE_PARA
-#define DE_PARA KC_NUBS        // §
+#define DE_PARA KC_GRV         // §
 #undef DE_RING
-#define DE_RING S(KC_NUBS)     // °
-#define DE_DEG  S(KC_NUBS)     // °
+#define DE_RING S(KC_GRV)      // °
+#define DE_DEG  S(KC_GRV)      // °
 #undef DE_CIRC
 #define DE_CIRC KC_EQL         // ^ (dead key, as on German)
 #undef DE_GRV
