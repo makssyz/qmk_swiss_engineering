@@ -850,9 +850,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
       } else {
         if (record->event.pressed) {
-          // Capital Ö on Swiss German: dead ¨ key, then Shift+O
-          tap_code16(KC_RBRC);
-          tap_code16(LSFT(KC_O));
+          uint8_t shift = get_mods() & MOD_MASK_SHIFT;
+          if (shift) {
+            // Swiss German has no Ö key (Shift+ö gives é): dead ¨ key, then Shift+O
+            del_mods(shift);
+            tap_code16(KC_RBRC);
+            tap_code16(LSFT(KC_O));
+            add_mods(shift);
+          } else {
+            register_code16(DE_OE);
+          }
+        } else {
+          unregister_code16(DE_OE);
         }  
       }  
       return false;
