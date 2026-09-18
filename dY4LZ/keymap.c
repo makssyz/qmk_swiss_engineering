@@ -845,9 +845,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
       } else {
         if (record->event.pressed) {
-          register_code16(CH_OE);
+          register_code16(LSFT(CH_OE));
         } else {
-          unregister_code16(CH_OE);
+          unregister_code16(LSFT(CH_OE));
         }  
       }  
       return false;
