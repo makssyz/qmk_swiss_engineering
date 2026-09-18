@@ -1,6 +1,7 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
 #include "i18n.h"
+#include "swiss_de.h"
 #define MOON_LED_LEVEL LED_LEVEL
 #ifndef ZSA_SAFE_RANGE
 #define ZSA_SAFE_RANGE SAFE_RANGE
@@ -273,7 +274,7 @@ void dance_1_finished(tap_dance_state_t *state, void *user_data) {
     switch (dance_state[1].step) {
         case SINGLE_TAP: register_code16(DE_GRV); break;
         case SINGLE_HOLD: register_code16(DE_ACUT); break;
-        case DOUBLE_TAP: register_code16(DE_TILD); break;
+        case DOUBLE_TAP: swiss_send_tilde(); break;
         case DOUBLE_SINGLE_TAP: tap_code16(DE_GRV); register_code16(DE_GRV);
     }
 }
@@ -283,7 +284,7 @@ void dance_1_reset(tap_dance_state_t *state, void *user_data) {
     switch (dance_state[1].step) {
         case SINGLE_TAP: unregister_code16(DE_GRV); break;
         case SINGLE_HOLD: unregister_code16(DE_ACUT); break;
-        case DOUBLE_TAP: unregister_code16(DE_TILD); break;
+        case DOUBLE_TAP: break;
         case DOUBLE_SINGLE_TAP: unregister_code16(DE_GRV); break;
     }
     dance_state[1].step = 0;
@@ -555,6 +556,10 @@ tap_dance_action_t tap_dance_actions[] = {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (keycode == DE_TILD) {
+    if (record->event.pressed) swiss_send_tilde();
+    return false;
+  }
   switch (keycode) {
   case QK_MODS ... QK_MODS_MAX:
     // Mouse and consumer keys (volume, media) with modifiers work inconsistently across operating systems,
@@ -845,9 +850,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
       } else {
         if (record->event.pressed) {
-          register_code16(LSFT(CH_OE));
-        } else {
-          unregister_code16(LSFT(CH_OE));
+          // Capital Ö on Swiss German: dead ¨ key, then Shift+O
+          tap_code16(KC_RBRC);
+          tap_code16(LSFT(KC_O));
         }  
       }  
       return false;
@@ -995,9 +1000,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
       } else {
         if (record->event.pressed) {
-          register_code16(LSFT(DE_CIRC));
+          register_code16(DE_DEG);
         } else {
-          unregister_code16(LSFT(DE_CIRC));
+          unregister_code16(DE_DEG);
         }  
       }  
       return false;
