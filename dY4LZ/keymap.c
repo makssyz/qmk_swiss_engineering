@@ -68,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                     KC_LEFT_SHIFT,  TD(DANCE_0),                                    TD(DANCE_2),    MT(MOD_LSFT, KC_BSPC)
   ),
   [1] = LAYOUT_voyager(
-    MAC_LOCK,       MAC_MISSION_CONTROL,DE_SQ2,         DE_SQ3,         DE_EURO,        LGUI(DE_PLUS),                                  KC_TRANSPARENT, KC_KP_7,        KC_KP_8,        KC_KP_9,        LSFT(DE_LESS),  LCTL(KC_SPACE), 
+    MAC_LOCK,       MAC_MISSION_CONTROL,DE_SQ2,         DE_SQ3,         DE_EURO,        LGUI(DE_PLUS),                                  KC_TRANSPARENT, KC_KP_7,        KC_KP_8,        KC_KP_9,        DE_DEG,         LCTL(KC_SPACE), 
     MAC_SPOTLIGHT,  DE_LCBR,        DE_RCBR,        DE_LBRC,        DE_RBRC,        LGUI(DE_MINS),                                  KC_KP_PLUS,     KC_KP_4,        KC_KP_5,        KC_KP_6,        DE_PARA,        KC_TRANSPARENT, 
     MAC_SIRI,       LGUI(KC_A),     LGUI(LSFT(KC_5)),DE_LPRN,        DE_RPRN,        LGUI(LSFT(DE_Z)),                                KC_KP_MINUS,    KC_KP_1,        KC_KP_2,        KC_KP_3,        KC_KP_ASTERISK, DE_TILD,        
     KC_TRANSPARENT, KC_TRANSPARENT, KC_MAC_CUT,     KC_MAC_COPY,    KC_MAC_PASTE,   LGUI(DE_Z),                                     KC_TRANSPARENT, KC_KP_0,        KC_TRANSPARENT, KC_TRANSPARENT, KC_KP_SLASH,    KC_KP_EQUAL,    
