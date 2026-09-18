@@ -714,11 +714,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           unregister_code16(KC_A);
         }
       } else {
-        if (record->event.pressed) {
-          register_code16(DE_AE);
-        } else {
-          unregister_code16(DE_AE);
-        }  
+        swiss_umlaut(record, DE_AE, KC_A);  
       }  
       return false;
     case DUAL_FUNC_9:
@@ -834,11 +830,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           unregister_code16(KC_U);
         }
       } else {
-        if (record->event.pressed) {
-          register_code16(DE_UE);
-        } else {
-          unregister_code16(DE_UE);
-        }  
+        swiss_umlaut(record, DE_UE, KC_U);  
       }  
       return false;
     case DUAL_FUNC_17:
@@ -849,20 +841,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           unregister_code16(KC_O);
         }
       } else {
-        if (record->event.pressed) {
-          uint8_t shift = get_mods() & MOD_MASK_SHIFT;
-          if (shift) {
-            // Swiss German has no Ö key (Shift+ö gives é): dead ¨ key, then Shift+O
-            del_mods(shift);
-            tap_code16(KC_RBRC);
-            tap_code16(LSFT(KC_O));
-            add_mods(shift);
-          } else {
-            register_code16(DE_OE);
-          }
-        } else {
-          unregister_code16(DE_OE);
-        }  
+        swiss_umlaut(record, DE_OE, KC_O);  
       }  
       return false;
     case DUAL_FUNC_18:

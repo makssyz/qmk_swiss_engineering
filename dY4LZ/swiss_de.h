@@ -100,3 +100,22 @@ static inline void swiss_send_tilde(void) {
 #define DE_SQ2  KC_NO
 #undef DE_SQ3
 #define DE_SQ3  KC_NO
+
+// Hold action for umlaut keys: ä/ö/ü, or Ä/Ö/Ü while Shift is held.
+// Swiss German has no capital-umlaut keys (Shift+ä/ö/ü gives à/é/è), so capitals
+// are typed as the dead ¨ key followed by Shift+vowel.
+static inline void swiss_umlaut(keyrecord_t *record, uint16_t umlaut, uint16_t vowel) {
+  if (record->event.pressed) {
+    uint8_t shift = get_mods() & MOD_MASK_SHIFT;
+    if (shift) {
+      del_mods(shift);
+      tap_code16(KC_RBRC);
+      tap_code16(LSFT(vowel));
+      add_mods(shift);
+    } else {
+      register_code16(umlaut);
+    }
+  } else {
+    unregister_code16(umlaut);
+  }
+}
